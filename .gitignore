@@ -1,0 +1,4 @@
+# Project exclude paths
+/CloudLib/target/
+/CloudMaster/target/
+/CloudWrapper/target/
