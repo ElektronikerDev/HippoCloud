@@ -3,6 +3,7 @@ package de.elektroniker.hippocloud.lib.master;
 import de.elektroniker.hippocloud.lib.config.CloudConfig;
 
 import java.io.File;
+import java.util.UUID;
 
 /******************************************************************
  *    Copyright © Thomas Michaelis 2019                                    
@@ -34,6 +35,7 @@ public class CloudMasterRegistry implements MasterRegistry {
         cloudConfig.read(masterConfigFile);
         String hostname = (String) cloudConfig.get("hostname");
         int port = new Double((Double) cloudConfig.get("port")).intValue();
+        UUID uuid = UUID.fromString((String) cloudConfig.get("uuid"));
 
         Master master = new Master() {
             @Override
@@ -51,6 +53,8 @@ public class CloudMasterRegistry implements MasterRegistry {
         return this.master;
 
     }
+
+
 
 
 }

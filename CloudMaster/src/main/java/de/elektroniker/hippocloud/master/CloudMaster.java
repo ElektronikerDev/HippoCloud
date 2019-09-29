@@ -5,8 +5,8 @@ import de.elektroniker.hippocloud.lib.CloudLib;
 import de.elektroniker.hippocloud.lib.authkey.CloudAuthKeyFactory;
 import de.elektroniker.hippocloud.lib.console.DefaultConsole;
 import de.elektroniker.hippocloud.lib.console.DefaultConsoleReader;
+import de.elektroniker.hippocloud.lib.master.Master;
 import de.elektroniker.hippocloud.lib.packet.list.HelloPacket;
-import de.elektroniker.hippocloud.lib.packet.list.IsMasterOnlinePacket;
 import de.elektroniker.hippocloud.lib.packet.listener.CloudPacketListenerRegistry;
 import de.elektroniker.hippocloud.lib.utils.Utils;
 import de.elektroniker.hippocloud.master.commands.CreateCommand;
@@ -28,7 +28,7 @@ public class CloudMaster implements Utils {
     private Client client;
     private CloudPacketListenerRegistry cloudPacketListenerRegistry;
     private UUID masterUUID;
-
+    private Master master;
     public static CloudMaster create() {
         return new CloudMaster();
     }
@@ -66,7 +66,6 @@ public class CloudMaster implements Utils {
         // ============================================== //
         UUID packetID = getCloudLib().getPacketRegistry().registerPacket(HelloPacket.class);
         getCloudLib().getPacketRegistry().getPacket(packetID).send(getClient().getChannel());
-        getCloudLib().getPacketRegistry().registerPacket(IsMasterOnlinePacket.class);
         // ============================================== //
         DefaultConsoleReader defaultConsoleReader = new DefaultConsoleReader.Builder().setCloudLib(cloudLib).setPrefix("Master>").build();
         getCloudLib().getConsoleRegistry().registerReader(defaultConsoleReader);

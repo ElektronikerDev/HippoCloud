@@ -28,11 +28,11 @@ public class CloudPacketFactory implements PacketFactory {
 
 
   @Override
-  public Packet create(Class<? extends Packet> packetClazz, String raw) {
+  public Packet create(Class<? extends Packet> packetClass, String raw) {
     Gson gson = new Gson();
     Map<String, Object> values = gson.fromJson(raw, HashMap.class);
 
-    Packet packet = registry.getPacket(packetClazz);
+    Packet packet = registry.getPacket(packetClass);
 
     values.forEach((key, value) -> {
       Field field;

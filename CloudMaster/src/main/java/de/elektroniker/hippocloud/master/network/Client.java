@@ -107,7 +107,7 @@ public class Client implements Utils {
                 Class<? extends Packet> packetDataClazz = null;
                 for (Map.Entry<UUID, Class<? extends Packet>> entry : cloudLib.getPacketRegistry().getPackets().entrySet()) {
                     Class<? extends Packet> aClass = entry.getValue();
-                    if (packetData.getPacketClazz() == aClass.getSimpleName()) {
+                    if (packetData.getPacketClazz().equals(aClass.getSimpleName())) {
                         packetDataClazz = aClass;
                     }
                 }

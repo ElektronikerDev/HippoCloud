@@ -64,7 +64,8 @@ public class CloudPacketRegistry implements PacketRegistry {
     try {
       for (Entry<UUID, Class<? extends Packet>> entry : getPackets().entrySet()) {
         Class<? extends Packet> aClass = entry.getValue();
-        if (aClass.getName().equals(clazz.getName())) {
+        if (aClass.getName().equals(
+            clazz.getName())) {
           return clazz.newInstance();
         }
       }

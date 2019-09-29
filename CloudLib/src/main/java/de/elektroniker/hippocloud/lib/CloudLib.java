@@ -2,6 +2,7 @@ package de.elektroniker.hippocloud.lib;
 
 import de.elektroniker.hippocloud.lib.command.CloudCommandRegistry;
 import de.elektroniker.hippocloud.lib.command.CommandRegistry;
+import de.elektroniker.hippocloud.lib.config.Config;
 import de.elektroniker.hippocloud.lib.console.CloudConsoleRegistry;
 import de.elektroniker.hippocloud.lib.console.ConsoleRegistry;
 import de.elektroniker.hippocloud.lib.master.CloudMasterRegistry;

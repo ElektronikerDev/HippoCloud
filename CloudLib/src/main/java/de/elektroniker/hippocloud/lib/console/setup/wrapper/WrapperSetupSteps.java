@@ -11,6 +11,9 @@ import de.elektroniker.hippocloud.lib.setup.Step;
 
 public class WrapperSetupSteps {
 
+    @Step(message = "Whats the Name of this Wrapper?", invalidInputs = {"127.0.0.1", "localhost"})
+    private String name;
+
     @Step(message = "Whats the Hostname/Hostadress of this Wrapper?", invalidInputs = {"127.0.0.1", "localhost"})
     private String hostname;
 

@@ -1,12 +1,15 @@
 package de.elektroniker.hippocloud.master.network;
 
+import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import de.elektroniker.hippocloud.lib.CloudLib;
 import de.elektroniker.hippocloud.lib.packet.Packet;
-import de.elektroniker.hippocloud.lib.packet.list.*;
-import de.elektroniker.hippocloud.lib.packet.list.IsMasterOnlinePacket;
+import de.elektroniker.hippocloud.lib.packet.Receiver;
+import de.elektroniker.hippocloud.lib.packet.list.AuthSuccessfullyPacket;
+import de.elektroniker.hippocloud.lib.packet.list.WrapperAuthenticateToMasterPacket;
 import de.elektroniker.hippocloud.lib.packet.listener.PacketListener;
 import de.elektroniker.hippocloud.lib.utils.Utils;
+import de.elektroniker.hippocloud.lib.wrapper.Wrapper;
 
 /******************************************************************
  *    Copyright © Thomas Michaelis 2019                                    
@@ -18,14 +21,16 @@ import de.elektroniker.hippocloud.lib.utils.Utils;
 public class CloudPacketListener implements PacketListener, Utils {
 
 
-    @Override
-    public void onReceive(CloudLib cloudLib, Channel channel, Packet packet) {
-        if(packet.equals(IsMasterOnlinePacket.class)){
-            log(packet.getClazz().getSimpleName());
-            cloudLib.getPacketRegistry().getPacket(MasterAvailablePacket.class).send(channel);
-        }
+  @Override
+  public void onReceive(CloudLib cloudLib, Channel channel, Packet packet) {
+    if (packet.equals(WrapperAuthenticateToMasterPacket.class)) {
+      WrapperAuthenticateToMasterPacket wrapperAuthenticateToMasterPacket = (WrapperAuthenticateToMasterPacket) packet;
+      cloudLib.getWrapperRegistry().registerWrapper(new Gson().fromJson(wrapperAuthenticateToMasterPacket.getWrapper(), Wrapper.class));
 
+      cloudLib.getPacketRegistry().getPacket(AuthSuccessfullyPacket.class).send(null, Receiver.WRAPPER, channel);
     }
+
+  }
 
 
 }

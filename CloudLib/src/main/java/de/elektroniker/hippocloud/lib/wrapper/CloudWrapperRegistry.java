@@ -1,5 +1,6 @@
 package de.elektroniker.hippocloud.lib.wrapper;
 
+import de.elektroniker.hippocloud.lib.utils.Utils;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
  ******************************************************************/
 
 
-public class CloudWrapperRegistry implements WrapperRegistry {
+public class CloudWrapperRegistry implements WrapperRegistry, Utils {
 
     private ArrayList<Wrapper> registeredWrappers = new ArrayList<>();
 
@@ -22,6 +23,7 @@ public class CloudWrapperRegistry implements WrapperRegistry {
     public boolean registerWrapper(Wrapper wrapper) {
         if(registeredWrappers.contains(wrapper))return false;
         registeredWrappers.add(wrapper);
+        log("Registered Wrapper "+wrapper.getName()+"@"+wrapper.getHostname()+":" + wrapper.getPort() +" ["+getRegisteredWrappers().size()+"]");
         return true;
     }
 
