@@ -1,6 +1,6 @@
 # Hippo-Cloud
 
-The HippoCloud is an open source project by Thomas Michaelis <@Electronics>.
+The HippoCloud is an open source project by Thomas Michaelis <@Elektroniker>.
 The cloud enables server management across multiple Linux / Windows / macOS servers. Cloud communication is based on RabbitMQ.
 
 **This project is NOT finished and will be further developed.**
