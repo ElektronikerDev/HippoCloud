@@ -72,11 +72,9 @@ public class CloudWrapper implements Utils {
     cloudPacketListenerRegistry.register(new CloudPacketListener());
     // ============================================== //
     client = Client.create(wrapperUUID, cloudLib);
-    client.start(cloudPacketListenerRegistry);
 
     try {
       this.channel = client.start(cloudPacketListenerRegistry).get();
-      log("~~~~> " + channel.getChannelNumber());
     } catch (Exception e) {
       e.printStackTrace();
     }
