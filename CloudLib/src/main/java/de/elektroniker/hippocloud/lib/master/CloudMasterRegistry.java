@@ -27,6 +27,7 @@ public class CloudMasterRegistry implements MasterRegistry {
         if (!masterConfigFile.exists()) {
             cloudConfig.set("hostname", "localhost");
             cloudConfig.set("port", 5672);
+            cloudConfig.set("uuid", UUID.randomUUID().toString());
             cloudConfig.save(masterConfigFile);
         }
 

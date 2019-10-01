@@ -25,9 +25,10 @@ public class CloudPacketListener implements PacketListener, Utils {
   public void onReceive(CloudLib cloudLib, Channel channel, Packet packet) {
     if (packet.equals(WrapperAuthenticateToMasterPacket.class)) {
       WrapperAuthenticateToMasterPacket wrapperAuthenticateToMasterPacket = (WrapperAuthenticateToMasterPacket) packet;
-      cloudLib.getWrapperRegistry().registerWrapper(new Gson().fromJson(wrapperAuthenticateToMasterPacket.getWrapper(), Wrapper.class));
-
+      Wrapper wrapper = new Gson().fromJson(wrapperAuthenticateToMasterPacket.getWrapper(), Wrapper.class);
+      cloudLib.getWrapperRegistry().registerWrapper(wrapper);
       cloudLib.getPacketRegistry().getPacket(AuthSuccessfullyPacket.class).send(null, Receiver.WRAPPER, channel);
+      log("Registered Wrapper ["+wrapper.getName()+"] successfully!");
     }
 
   }

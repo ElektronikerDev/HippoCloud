@@ -8,7 +8,6 @@ import de.elektroniker.hippocloud.lib.CloudLib;
 import de.elektroniker.hippocloud.lib.packet.Packet;
 import de.elektroniker.hippocloud.lib.packet.Receiver;
 import de.elektroniker.hippocloud.lib.packet.data.PacketData;
-import de.elektroniker.hippocloud.lib.packet.list.AuthSuccessfullyPacket;
 import de.elektroniker.hippocloud.lib.packet.listener.CloudPacketListenerRegistry;
 import de.elektroniker.hippocloud.lib.utils.Utils;
 import java.util.Map;
@@ -118,13 +117,8 @@ public class Client implements Utils {
           return;
         }
         Packet packet = cloudLib.getPacketFactory().create(packetDataClazz, packetData.getBody());
-          if (packet.getClazz().equals(AuthSuccessfullyPacket.class)) {
-              cloudLib.setMasterOnline(true);
-              log("Successfully connected to Master.");
-          }
 
-        packetListenerRegistry.getPacketListeners()
-            .forEach(packetListener -> packetListener.onReceive(cloudLib, channel, packet));
+        packetListenerRegistry.getPacketListeners().forEach(packetListener -> packetListener.onReceive(cloudLib, channel, packet));
       }, consumerTag -> {
       });
     } catch (Exception e) {

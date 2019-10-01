@@ -28,7 +28,6 @@ public abstract class Packet {
     }
 
     public void send(UUID from, Receiver receiver, Channel channel) {
-        System.out.println("SENNDDD -> " + getClazz().getSimpleName());
 
         PacketData packetData = new PacketData() {
 
