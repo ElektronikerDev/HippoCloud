@@ -15,7 +15,6 @@ import java.util.UUID;
 
 public class CloudGameServerRegistry implements GameServerRegistry {
     private ArrayList<GameServer> gameServers = new ArrayList<>();
-
     public static CloudGameServerRegistry create() {
         return new CloudGameServerRegistry();
     }

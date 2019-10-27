@@ -29,60 +29,18 @@ public class CloudGameServerGroupFactory implements GameServerGroupFactory, Util
             return null;
         }
 
+        GameServerGroup gameServerGroup = new CloudGameServerGroup.Builder().
+                withWrapper(wrapper).
+                withName(name).
+                withMaintenanceEnabled(maintenance).
+                withMaintenanceMessage("§cServer is in Maintenance").
+                withMaxMemory(maxMemory).
+                withMinMemory(minMemory).
+                withMinOnline(minServer).
+                withMaxOnline(maxServer).
+                build();
 
-        GameServerGroup gameServerGroup = new GameServerGroup() {
-            @Override
-            public UUID getUUID() {
-                return uuid;
-            }
-
-            @Override
-            public String getName() {
-                return name;
-            }
-
-            @Override
-            public Wrapper getWrapper() {
-                return wrapper;
-            }
-
-            @Override
-            public boolean isMaintenance() {
-                return maintenance;
-            }
-
-            @Override
-            public String getMaintenanceMessage() {
-                return "§cServer Maintenance :c";
-            }
-
-            @Override
-            public int getMinMemory() {
-                return minMemory;
-            }
-
-            @Override
-            public int getMaxMemory() {
-                return maxMemory;
-            }
-
-            @Override
-            public boolean isStatic() {
-                return isStatic;
-            }
-
-            @Override
-            public int getMinOnline() {
-                return minServer;
-            }
-
-            @Override
-            public int getMaxOnline() {
-                return maxServer;
-            }
-        };
-
-        //TODO: Create servergroup config
+        //TODO: delete factory!
 
 
 

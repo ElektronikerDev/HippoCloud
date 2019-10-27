@@ -52,57 +52,18 @@ public class CloudGameServerGroupRegistry implements GameServerGroupRegistry {
             CloudConfig cloudConfig = CloudConfig.create();
             cloudConfig.read(file);
 
-            GameServerGroup gameServerGroup = new GameServerGroup() {
-                @Override
-                public UUID getUUID() {
-                    return UUID.randomUUID();
-                }
+            GameServerGroup gameServerGroup = new CloudGameServerGroup.Builder().
+                    withName((String) cloudConfig.get("name")).
+                    withWrapper(cloudLib.getWrapperRegistry().getWrapper((String) cloudConfig.get("wrapper"))).
+                    withMaintenanceEnabled((boolean) cloudConfig.get("maintenance")).
+                    withMaintenanceMessage((String) cloudConfig.get("maintenanceMessage")).
+                    withMaxMemory(new Double((Double) cloudConfig.get("minMemory")).intValue()).
+                    withMinMemory(new Double((Double) cloudConfig.get("maxMemory")).intValue()).
+                    withStaticEnabled((boolean) cloudConfig.get("static")).
+                    withMaxOnline(new Double((Double) cloudConfig.get("maxServerOnline")).intValue()).
+                    withMinOnline(new Double((Double) cloudConfig.get("minServerOnline")).intValue()).
+                    build();
 
-                @Override
-                public String getName() {
-                    return (String) cloudConfig.get("name");
-                }
-
-                @Override
-                public Wrapper getWrapper() {
-                    return cloudLib.getWrapperRegistry().getWrapper((String) cloudConfig.get("wrapper"));
-                }
-
-                @Override
-                public boolean isMaintenance() {
-                    return (boolean) cloudConfig.get("maintenance");
-                }
-
-                @Override
-                public String getMaintenanceMessage() {
-                    return "sad life";
-                }
-
-                @Override
-                public int getMinMemory() {
-                    return new Double((Double) cloudConfig.get("minMemory")).intValue();
-                }
-
-                @Override
-                public int getMaxMemory() {
-                    return new Double((Double) cloudConfig.get("maxMemory")).intValue();
-                }
-
-                @Override
-                public boolean isStatic() {
-                    return (boolean) cloudConfig.get("isStatic");
-                }
-
-                @Override
-                public int getMinOnline() {
-                    return new Double((Double) cloudConfig.get("minServerOnline")).intValue();
-                }
-
-                @Override
-                public int getMaxOnline() {
-                    return new Double((Double) cloudConfig.get("maxServerOnline")).intValue();
-                }
-            };
             if (!this.gameServerGroups.contains(gameServerGroup))
                 addGameServerGroup(gameServerGroup);
         });

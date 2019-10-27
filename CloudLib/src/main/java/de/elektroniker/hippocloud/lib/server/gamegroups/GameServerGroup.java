@@ -1,9 +1,11 @@
 package de.elektroniker.hippocloud.lib.server.gamegroups;
 
+import de.elektroniker.hippocloud.lib.thread.ThreadPoolRegistry;
 import de.elektroniker.hippocloud.lib.wrapper.Wrapper;
 
 import java.io.File;
 import java.util.UUID;
+import java.util.concurrent.Executors;
 
 /******************************************************************
  *    Urheberrechtshinweis                                                       
@@ -13,7 +15,7 @@ import java.util.UUID;
 ******************************************************************/
 
 
-public interface GameServerGroup {
+public interface GameServerGroup extends ThreadPoolRegistry {
 
     UUID getUUID();
     String getName();
@@ -25,6 +27,8 @@ public interface GameServerGroup {
     boolean isStatic();
     int getMinOnline();
     int getMaxOnline();
+
+
 
     default File getTemplateDirectory(){
         return new File("./local/templates/groups/servers/" + getName() +"/");

@@ -1,6 +1,7 @@
 package de.elektroniker.hippocloud.lib.server.gamegroups;
 
 import de.elektroniker.hippocloud.lib.CloudLib;
+import de.elektroniker.hippocloud.lib.thread.ThreadPoolRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.UUID;
  *    Copyright © Thomas Michaelis 2019                                    
  *    Erstellt: 22.09.2019 / 14:58        
  *    Orginal Class: GameServerGroupRegistry
-******************************************************************/
+ ******************************************************************/
 
 
 public interface GameServerGroupRegistry {
@@ -25,7 +26,6 @@ public interface GameServerGroupRegistry {
 
 
     void loadGroups(CloudLib cloudLib);
-
 
 
 }
