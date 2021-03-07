@@ -25,8 +25,8 @@ public class DefaultConsoleReader implements InternalConsoleReader {
         consoleThread = new Thread(() -> {
             try {
                 cloudLib.getConsoleRegistry().getCurrentConsole().hello();
+                Scanner in = new Scanner(System.in);
                 while (isAlive) {
-                    Scanner in = new Scanner(System.in);
                     String line = in.nextLine();
                     if (!line.trim().isEmpty()) {
                         cloudLib.getConsoleRegistry().getCurrentConsole().setCloudLib(cloudLib).handle(line.split(" "));
