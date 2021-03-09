@@ -41,7 +41,7 @@ public interface Setup extends Console {
     default boolean setAnswer(Field field, Object value) {
         if(value.getClass().getSimpleName() != field.getType().getSimpleName()) return false;
         Step step = field.getAnnotation(Step.class);
-        for (String invalid : step.invalidInputs()) if (value.toString().contains(invalid)) return false;
+        for (String invalid : step.invalidInputs()) if (value.toString().equals(invalid)) return false;
 
         if (answers.containsKey(field)) answers.remove(field);
         answers.put(field, value);
